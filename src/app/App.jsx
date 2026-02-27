@@ -10,7 +10,10 @@ function App() {
     options,
     selectedOption,
     setSelectedOption,
-    loading
+    loading,
+    isAnswered,
+    isCorrect,
+    checkAnswer
   } = useExercise("basic");
 
   if (loading) {
@@ -25,20 +28,48 @@ function App() {
         <div>
           <p>Select the correct word:</p>
           
-          {options.map((option) => (
+          {options.map((option) => {
+            const isSelected = selectedOption?.id === option.id;
+            const isRight = option.id === currentWord.id;
+
+            return (
+              <button
+                key={option.id}
+                disabled={isAnswered}
+                onClick={() => setSelectedOption(option)}
+                style={{
+                  display: "block",
+                  margin: "10px 0",
+                  background: isAnswered 
+                    ? isRight 
+                    ? "#4CAF50" 
+                    : isSelected 
+                    ? "#F44336" 
+                    : "white" 
+                    : isSelected 
+                    ? "#CCC" 
+                    : "white",
+                  color: isAnswered && isRight ? "white" : "black"
+                }}>
+                  {option.word}
+                </button>
+            );
+          })}
+
+          {!isAnswered && (
             <button
-              key={option.id}
-              onClick={() => setSelectedOption(option)}
-              style={{
-                display: "block",
-                margin: "10px 0",
-                background:
-                  selectedOption?.id === option.id ? "#CCC" : "white",
-              }}
-            >
-              {option.word}
-            </button>
-          ))}
+              onClick={checkAnswer}
+              disabled={!selectedOption}
+              >
+                Confirm
+              </button>
+          )}
+
+          {isAnswered && (
+            <p>
+              {isCorrect ? "✅ Correct!" : "❌ Wrong answer"}
+            </p>
+          )}
         </div>
       )}
     </div>

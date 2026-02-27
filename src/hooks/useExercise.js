@@ -10,6 +10,9 @@ export function useExercise(level = "basic") {
     const [options, setOptions] = useState([]);
     const [selectedOption, setSelectedOption] = useState(null);
 
+    const [isAnswered, setIsAnswered] = useState(false);
+    const [isCorrect, setIsCorrect] = useState(null);
+
     useEffect(() => {
         async function loadWords() {
             setLoading(true);
@@ -35,12 +38,24 @@ export function useExercise(level = "basic") {
         loadWords();
     }, [level]);
 
+    function checkAnswer() {
+        if (!selectedOption) return;
+
+        const correct = selectedOption.id === currentWord.id;
+
+        setIsCorrect(correct);
+        setIsAnswered(true);
+    }
+
     return {
         words,
         currentWord,
         options,
         selectedOption,
         setSelectedOption,
-        loading
+        loading,
+        isAnswered,
+        isCorrect,
+        checkAnswer
     };
 }
