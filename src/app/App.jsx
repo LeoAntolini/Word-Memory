@@ -15,11 +15,25 @@ function App() {
     isCorrect,
     checkAnswer,
     nextQuestion,
-    score
+    score,
+    isFinished,
+    words
   } = useExercise("basic");
 
   if (loading) {
     return <h1>Loading...</h1>;
+  }
+
+  if (isFinished) {
+    const percentage = Math.round((score / words.length) * 100);
+
+    return (
+      <div>
+        <h1>Exercise Finished 🎉</h1>
+        <h2>Final Score: {score} / {words.length}</h2>
+        <h3>Accuracy: {percentage}%</h3>
+      </div>
+    )
   }
 
   return (
@@ -78,6 +92,7 @@ function App() {
               </button>
             </div>
           )}
+
         </div>
       )}
     </div>

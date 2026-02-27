@@ -16,6 +16,8 @@ export function useExercise(level = "basic") {
     const [score, setScore] = useState(0);
     const [index, setIndex] = useState(0);
 
+    const [isFinished, setIsFinished] = useState(false);
+
     useEffect(() => {
         async function loadWords() {
             setLoading(true);
@@ -55,6 +57,13 @@ export function useExercise(level = "basic") {
     }
 
     function nextQuestion() {
+        const nextIndex = index + 1;
+
+        if (nextIndex >= words.length) {
+            setIsFinished(true);
+            return;
+        }
+
         setSelectedOption(null);
         setIsAnswered(false);
         setIsCorrect(null);
@@ -72,6 +81,8 @@ export function useExercise(level = "basic") {
         isCorrect,
         checkAnswer,
         nextQuestion,
-        score
+        score,
+        isFinished,
+        words
     };
 }
