@@ -13,7 +13,9 @@ function App() {
     loading,
     isAnswered,
     isCorrect,
-    checkAnswer
+    checkAnswer,
+    nextQuestion,
+    score
   } = useExercise("basic");
 
   if (loading) {
@@ -23,11 +25,12 @@ function App() {
   return (
     <div>
       <h1>English Vocabulary Trainer</h1>
+      <h2>Score: {score}</h2>
 
       {currentWord && (
         <div>
           <p>Select the correct word:</p>
-          
+
           {options.map((option) => {
             const isSelected = selectedOption?.id === option.id;
             const isRight = option.id === currentWord.id;
@@ -40,19 +43,19 @@ function App() {
                 style={{
                   display: "block",
                   margin: "10px 0",
-                  background: isAnswered 
-                    ? isRight 
-                    ? "#4CAF50" 
-                    : isSelected 
-                    ? "#F44336" 
-                    : "white" 
-                    : isSelected 
-                    ? "#CCC" 
-                    : "white",
+                  background: isAnswered
+                    ? isRight
+                      ? "#4CAF50"
+                      : isSelected
+                        ? "#F44336"
+                        : "white"
+                    : isSelected
+                      ? "#CCC"
+                      : "white",
                   color: isAnswered && isRight ? "white" : "black"
                 }}>
-                  {option.word}
-                </button>
+                {option.word}
+              </button>
             );
           })}
 
@@ -60,15 +63,20 @@ function App() {
             <button
               onClick={checkAnswer}
               disabled={!selectedOption}
-              >
-                Confirm
-              </button>
+            >
+              Confirm
+            </button>
           )}
 
           {isAnswered && (
-            <p>
-              {isCorrect ? "✅ Correct!" : "❌ Wrong answer"}
-            </p>
+            <div>
+              <p>
+                {isCorrect ? "✅ Correct!" : "❌ Wrong answer"}
+              </p>
+              <button onClick={nextQuestion}>
+                Next
+              </button>
+            </div>
           )}
         </div>
       )}

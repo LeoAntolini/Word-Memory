@@ -13,6 +13,9 @@ export function useExercise(level = "basic") {
     const [isAnswered, setIsAnswered] = useState(false);
     const [isCorrect, setIsCorrect] = useState(null);
 
+    const [score, setScore] = useState(0);
+    const [index, setIndex] = useState(0);
+
     useEffect(() => {
         async function loadWords() {
             setLoading(true);
@@ -20,15 +23,15 @@ export function useExercise(level = "basic") {
             setWords(data);
             
             if (data.length > 0) {
-                const correct = data[0];
+                const word = data[index];
 
                 const wrongOptions = data
-                    .filter((word) => word.id !== correct.id)
+                    .filter((w) => w.id !== word.id)
                     .slice(0, 3);
 
-                const allOptions = shuffle([correct, ...wrongOptions]);
+                const allOptions = shuffle([word, ...wrongOptions]);
 
-                setCurrentWord(correct);
+                setCurrentWord(word);
                 setOptions(allOptions);
             }
 
@@ -36,15 +39,26 @@ export function useExercise(level = "basic") {
         }
 
         loadWords();
-    }, [level]);
+    }, [index]);
 
     function checkAnswer() {
         if (!selectedOption) return;
 
         const correct = selectedOption.id === currentWord.id;
 
+        if (correct) {
+            setScore((prev) => prev + 1);
+        }
+
         setIsCorrect(correct);
         setIsAnswered(true);
+    }
+
+    function nextQuestion() {
+        setSelectedOption(null);
+        setIsAnswered(false);
+        setIsCorrect(null);
+        setIndex((prev) => prev + 1);
     }
 
     return {
@@ -56,6 +70,8 @@ export function useExercise(level = "basic") {
         loading,
         isAnswered,
         isCorrect,
-        checkAnswer
+        checkAnswer,
+        nextQuestion,
+        score
     };
 }
