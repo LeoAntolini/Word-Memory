@@ -5,15 +5,13 @@ import { useExercise } from "../hooks/useExercise"
 
 function App() {
 
-  useEffect(() => {
-    async function load() {
-      const words = await VocabularyService.getWordsByLevel("basic")
-      console.log(words)
-    }
-   load() 
-  }, [])
-
-  const { currentWord, loading } = useExercise("basic");
+  const {
+    currentWord,
+    options,
+    selectedOption,
+    setSelectedOption,
+    loading
+  } = useExercise("basic");
 
   if (loading) {
     return <h1>Loading...</h1>;
@@ -22,10 +20,25 @@ function App() {
   return (
     <div>
       <h1>English Vocabulary Trainer</h1>
+
       {currentWord && (
         <div>
-          <p>Word:</p>
-          <h2>{currentWord.word}</h2>
+          <p>Select the correct word:</p>
+          
+          {options.map((option) => (
+            <button
+              key={option.id}
+              onClick={() => setSelectedOption(option)}
+              style={{
+                display: "block",
+                margin: "10px 0",
+                background:
+                  selectedOption?.id === option.id ? "#CCC" : "white",
+              }}
+            >
+              {option.word}
+            </button>
+          ))}
         </div>
       )}
     </div>

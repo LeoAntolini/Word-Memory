@@ -21,6 +21,20 @@ const mockVocabulary = [
         imageUrl: "/assets/images/mountain.jpg",
         audioUrl: "/assets/audio/mountain.mp3",
         level: "intermediate"
+    },
+    {
+        id: 4,
+        word: "banana",
+        imageUrl: "/assets/images/mountain.jpg",
+        audioUrl: "/assets/audio/mountain.mp3",
+        level: "basic"
+    },
+    {
+        id: 5,
+        word: "pera",
+        imageUrl: "/assets/images/mountain.jpg",
+        audioUrl: "/assets/audio/mountain.mp3",
+        level: "basic"
     }
 ]
 
