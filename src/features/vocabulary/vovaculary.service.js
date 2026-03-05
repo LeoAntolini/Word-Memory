@@ -4,38 +4,17 @@ const mockVocabulary = [
     {
         id: 1,
         word: "Apple",
-        imageUrl: "/assets/images/apple.jpg",
+        imageUrl: "/public/images/apple.jpg",
         audioUrl: "/assets/audio/apple.mp3",
         level: "basic"
     },
     {
         id: 2,
         word: "Car",
-        imageUrl: "/assets/images/car.jpg",
+        imageUrl: "/public/images/car.png",
         audioUrl: "/assets/audio/car.mp3",
         level: "basic"
     },
-    {
-        id: 3,
-        word: "Mountain",
-        imageUrl: "/assets/images/mountain.jpg",
-        audioUrl: "/assets/audio/mountain.mp3",
-        level: "intermediate"
-    },
-    {
-        id: 4,
-        word: "banana",
-        imageUrl: "/assets/images/mountain.jpg",
-        audioUrl: "/assets/audio/mountain.mp3",
-        level: "basic"
-    },
-    {
-        id: 5,
-        word: "pera",
-        imageUrl: "/assets/images/mountain.jpg",
-        audioUrl: "/assets/audio/mountain.mp3",
-        level: "basic"
-    }
 ]
 
 export const VocabularyService = {

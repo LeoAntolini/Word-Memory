@@ -43,6 +43,11 @@ function App() {
 
       {currentWord && (
         <div>
+          <img
+            src={currentWord.imageUrl}
+            alt={currentWord.word}
+          />
+
           <p>Select the correct word:</p>
 
           {options.map((option) => {
