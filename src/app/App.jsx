@@ -1,4 +1,4 @@
-import { VocabularyService } from "../features/vocabulary/vovaculary.service"
+import { VocabularyService } from "../features/vocabulary/vocabulary.service"
 import { useEffect } from 'react'
 import './App.css'
 import { useExercise } from "../hooks/useExercise"

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { VocabularyService } from "../features/vocabulary/vovaculary.service"
+import { VocabularyService } from "../features/vocabulary/vocabulary.service"
 import { shuffle } from "../utils/shuffle";
 
 export function useExercise(level = "basic") {
