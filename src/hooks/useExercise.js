@@ -18,6 +18,8 @@ export function useExercise(level = "basic") {
 
     const [isFinished, setIsFinished] = useState(false);
 
+    const [reviewQueue, setReviewQueue] = useState([]);
+
     useEffect(() => {
         async function loadWords() {
             setLoading(true);
@@ -48,6 +50,10 @@ export function useExercise(level = "basic") {
 
         const correct = selectedOption.id === currentWord.id;
 
+        if (!correct) {
+            setReviewQueue((prev) => [...prev, currentWord]);
+        }
+
         if (correct) {
             setScore((prev) => prev + 1);
         }
@@ -59,15 +65,22 @@ export function useExercise(level = "basic") {
     function nextQuestion() {
         const nextIndex = index + 1;
 
-        if (nextIndex >= words.length) {
+        if (nextIndex < words.length) {
+            setIndex(nextIndex);
+        } else if (reviewQueue.length > 0) {
+            const nextReview = reviewQueue[0];
+
+            setCurrentWord(nextReview);
+
+            setReviewQueue((prev) => prev.slice(1));
+        } else {
             setIsFinished(true);
             return;
         }
 
         setSelectedOption(null);
-        setIsAnswered(false);
+        setIsAnswered(false)
         setIsCorrect(null);
-        setIndex((prev) => prev + 1);
     }
 
     return {
