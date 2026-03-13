@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import './App.css'
 import { useExercise } from "../features/vocabulary/hooks/useExercise"
 import { speakWord } from "../shared/utils/speakWord"
+import { OptionButton } from "../features/vocabulary/components/OptionButton"
 
 function App() {
 
@@ -48,32 +49,20 @@ function App() {
 
           {options.map((option) => {
             const isSelected = selectedOption?.id === option.id;
-            const isRight = option.id === currentWord.id;
+            const isCorrectOption = option.id === currentWord.id;
 
             return (
-              <button
+              <OptionButton
                 key={option.id}
-                disabled={isAnswered}
-                onClick={() => {
-                  setSelectedOption(option)
-                  speakWord(option.word)
+                option={option}
+                isSelected={isSelected}
+                isAnswered={isAnswered}
+                isCorrectOption={isCorrectOption}
+                onSelect={(opt) => {
+                  setSelectedOption(opt);
+                  speakWord(opt.word);
                 }}
-                style={{
-                  display: "block",
-                  margin: "10px 0",
-                  background: isAnswered
-                    ? isRight
-                      ? "#4CAF50"
-                      : isSelected
-                        ? "#F44336"
-                        : "white"
-                    : isSelected
-                      ? "#CCC"
-                      : "white",
-                  color: isAnswered && isRight ? "white" : "black"
-                }}>
-                {option.word}
-              </button>
+              />
             );
           })}
 
