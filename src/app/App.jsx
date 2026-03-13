@@ -1,7 +1,8 @@
-import { VocabularyService } from "../features/vocabulary/vovaculary.service"
+import { VocabularyService } from "../features/vocabulary/vocabulary.service"
 import { useEffect } from 'react'
 import './App.css'
 import { useExercise } from "../hooks/useExercise"
+import { speakWord } from "../utils/speakWord"
 
 function App() {
 
@@ -53,7 +54,10 @@ function App() {
               <button
                 key={option.id}
                 disabled={isAnswered}
-                onClick={() => setSelectedOption(option)}
+                onClick={() => {
+                  setSelectedOption(option)
+                  speakWord(option.word)
+                }}
                 style={{
                   display: "block",
                   margin: "10px 0",
