@@ -4,6 +4,7 @@ import './App.css'
 import { useExercise } from "../features/vocabulary/hooks/useExercise"
 import { speakWord } from "../shared/utils/speakWord"
 import { OptionButton } from "../features/vocabulary/components/OptionButton"
+import { ExerciseCard } from "../features/vocabulary/components/ExerciseCard"
 
 function App() {
 
@@ -47,24 +48,13 @@ function App() {
         <div>
           <p>Select the correct word:</p>
 
-          {options.map((option) => {
-            const isSelected = selectedOption?.id === option.id;
-            const isCorrectOption = option.id === currentWord.id;
-
-            return (
-              <OptionButton
-                key={option.id}
-                option={option}
-                isSelected={isSelected}
-                isAnswered={isAnswered}
-                isCorrectOption={isCorrectOption}
-                onSelect={(opt) => {
-                  setSelectedOption(opt);
-                  speakWord(opt.word);
-                }}
-              />
-            );
-          })}
+          <ExerciseCard
+            currentWord={currentWord}
+            options={options}
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
+            isAnswered={isAnswered}
+          />
 
           {!isAnswered && (
             <button
