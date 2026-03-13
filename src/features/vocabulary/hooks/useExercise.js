@@ -19,6 +19,7 @@ export function useExercise(level = "basic") {
     const [isFinished, setIsFinished] = useState(false);
 
     const [reviewQueue, setReviewQueue] = useState([]);
+    const [isReviewMode, setIsReviewMode] = useState(false);
 
     useEffect(() => {
         async function loadWords() {
@@ -68,6 +69,9 @@ export function useExercise(level = "basic") {
         if (nextIndex < words.length) {
             setIndex(nextIndex);
         } else if (reviewQueue.length > 0) {
+
+            setIsReviewMode(true);
+
             const nextReview = reviewQueue[0];
 
             setCurrentWord(nextReview);
