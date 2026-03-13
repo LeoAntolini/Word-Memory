@@ -1,8 +1,8 @@
-import { VocabularyService } from "../features/vocabulary/vocabulary.service"
+import { VocabularyService } from "../features/vocabulary/services/vocabulary.service"
 import { useEffect } from 'react'
 import './App.css'
-import { useExercise } from "../hooks/useExercise"
-import { speakWord } from "../utils/speakWord"
+import { useExercise } from "../features/vocabulary/hooks/useExercise"
+import { speakWord } from "../shared/utils/speakWord"
 
 function App() {
 

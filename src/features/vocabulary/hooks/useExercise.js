@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { VocabularyService } from "../features/vocabulary/vocabulary.service"
-import { shuffle } from "../utils/shuffle";
+import { VocabularyService } from "../services/vocabulary.service"
+import { shuffle } from "../../../shared/utils/shuffle";
 
 export function useExercise(level = "basic") {
     const [words, setWords] = useState([]);
